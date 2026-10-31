@@ -1,0 +1,58 @@
+import os
+from datetime import datetime
+
+# بيانات المقال التجريبي الذكي الذي سيولده السكربت
+article_title = "أحدث المستجدات والنقاشات في مجموعة المبادرة الوطنية للتنمية الاجتماعية"
+article_date = datetime.now().strftime("%Y-%m-%d")
+
+# محتوى HTML احترافي للمقال مصمم بـ Tailwind CSS
+html_content = f"""<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{article_title}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+    <!-- Navbar -->
+    <header class="bg-blue-600 text-white shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold">دليل المقاول الذكي</h1>
+            <a href="index.html" class="bg-white text-blue-600 px-4 py-2 rounded-lg font-semibold hover:bg-blue-50 transition">الرئيسية</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 max-w-3xl">
+        <article class="bg-white p-6 md:p-8 rounded-xl shadow-sm">
+            <span class="text-sm text-blue-600 font-semibold">{article_date}</span>
+            <h2 class="text-2xl md:text-3xl font-bold mt-2 mb-4 text-gray-900">{article_title}</h2>
+            <hr class="my-4">
+            <div class="space-y-4 text-lg leading-relaxed text-gray-700">
+                <p>مرحباً بكم متابعينا الأعزاء في تقريرنا الجديد المستوحى من أبرز النقاشات والتفاعلات داخل مجتمعنا الرقمي الضخم (320 ألف عضو).</p>
+                <p>نناقش اليوم أهم الفرص والمستجدات التي تم طرحها وكيف يمكن الاستفادة منها عبر آليات العمل الرقمي والتجارة بالعمولة والترويج الذكي.</p>
+                <h3 class="text-xl font-bold text-gray-900 mt-6">نقاط رئيسية تم تداولها:</h3>
+                <ul class="list-disc list-inside space-y-2">
+                    <li>تحليل اتجاهات السوق والمشاريع المصغرة.</li>
+                    <li>طرق استثمار الزيارات الكبيرة لتحقيق عائد مادي مستدام.</li>
+                    <li>أهمية البناء التلقائي للمحتوى عبر أدوات الويب الحديثة.</li>
+                </ul>
+            </div>
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white text-center py-6 mt-12">
+        <p>جميع الحقوق محفوظة &copy; 2026 - دليل المقاول الذكي</p>
+    </footer>
+</body>
+</html>
+"""
+
+# حفظ الملف باسم جديد في مجلد المشروع
+filename = "article_auto.html"
+with open(filename, "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print(f"تم توليد المقال الجديد بنجاح وحفظه تحت اسم: {filename}")

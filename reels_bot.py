@@ -3,7 +3,7 @@ import asyncio
 import requests
 import feedparser
 import edge_tts
-from moviepy.editor import TextClip, CompositeVideoClip, AudioFileClip, ColorClip
+from moviepy import TextClip, CompositeVideoClip, AudioFileClip, ColorClip
 
 # 1. جلب المفاتيح السرية من متغيرات البيئة (GitHub Secrets)
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
@@ -51,24 +51,23 @@ async def generate_reel_video(text_script):
     
     # العلامة المائية لحفظ الحقوق (في أعلى اليمين بشفافية أنيقة)
     watermark = TextClip(
-        "© Smart Mokawil | حصري", 
-        fontsize=38, 
-        color='white', 
-        font='Arial-Bold'
-    ).set_opacity(0.7).set_position(('right', 'top')).set_duration(duration)
+        text="© Smart Mokawil | حصري", 
+        font="Arial",
+        font_size=38, 
+        color='white'
+    ).with_opacity(0.7).with_position(('right', 'top')).with_duration(duration)
     
     # الكتابة المتحركة في منتصف الشاشة (Auto-Captions بخط عريض وأصفر ملفت)
     caption = TextClip(
-        text_script, 
-        fontsize=46, 
-        color='yellow', 
-        method='caption',
-        size=(900, None),
-        font='Arial-Bold'
-    ).set_position('center').set_duration(duration)
+        text=text_script, 
+        font="Arial",
+        font_size=46, 
+        color='yellow',
+        size=(900, None)
+    ).with_position('center').with_duration(duration)
     
     # دمج العناصر وتصدير الفيديو نهائياً
-    final = CompositeVideoClip([bg, caption, watermark]).set_audio(audio)
+    final = CompositeVideoClip([bg, caption, watermark]).with_audio(audio)
     final.write_videofile(video_output, fps=30, codec='libx264', audio_codec='aac')
     return video_output
 

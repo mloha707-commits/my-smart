@@ -49,18 +49,16 @@ async def generate_reel_video(text_script):
     # أبعاد الريلز الطولية (1080x1920) بخلفية أنيقة تناسب المنصة
     bg = ColorClip(size=(1080, 1920), color=(15, 23, 42), duration=duration)
     
-    # العلامة المائية لحفظ الحقوق (في أعلى اليمين بشفافية أنيقة)
+    # العلامة المائية لحفظ الحقوق (بدون تحديد اسم خط لتجنب خطأ النظام)
     watermark = TextClip(
-        text="© Smart Mokawil | حصري", 
-        font="Arial",
+        text="Smart Mokawil | حصري", 
         font_size=38, 
         color='white'
     ).with_opacity(0.7).with_position(('right', 'top')).with_duration(duration)
     
-    # الكتابة المتحركة في منتصف الشاشة (Auto-Captions بخط عريض وأصفر ملفت)
+    # الكتابة المتحركة في منتصف الشاشة
     caption = TextClip(
         text=text_script, 
-        font="Arial",
         font_size=46, 
         color='yellow',
         size=(900, None)

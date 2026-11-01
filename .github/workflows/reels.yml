@@ -1,33 +1,41 @@
 name: Automatic Reels Generator Bot
 
 on:
-  schedule:
-    - cron: '0 10 * * *'
   workflow_dispatch:
+  schedule:
+    - cron: '0 8 * * *'
 
 jobs:
   build-and-run:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
       - name: Install System Dependencies for Video
         run: |
           sudo apt-get update
-          sudo apt-get install -y ffmpeg imagemagick
+          sudo apt-get install -y ffmpeg
 
       - name: Install Python Libraries
         run: |
-          pip install edge-tts moviepy feedparser requests
+          pip install --upgrade pip
+          pip install moviepy edge-tts feedparser requests pillow
 
       - name: Run Reels Generator Bot
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: python reels_bot.py
+        run: |
+          python reels_bot.py
+
+      - name: Upload Generated Video Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: exclusive-reel-video
+          path: exclusive_reel.mp4
